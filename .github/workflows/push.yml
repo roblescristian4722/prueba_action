@@ -1,6 +1,12 @@
-- uses: danielr1996/kubectl-action@1.0.0
-  name: Deploy
-  with:
-    kubeconfig: ${{ secrets.KUBE_CONFIG }}
-    args: apply -f deployment.yaml
-
+on: push
+name: deploy
+jobs:
+  deploy:
+    name: deploy to cluster
+    runs-on: ubuntu-latest
+    steps:
+    - uses: danielr1996/kubectl-action@1.0.0
+      name: Deploy
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        args: apply -f deployment.yaml
